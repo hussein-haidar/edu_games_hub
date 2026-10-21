@@ -5,7 +5,6 @@
 @section('content')
     <div class="mx-auto" style="max-width: 46rem;">
         <div class="mb-3">
-            <a href="{{ route('admin.dashboard') }}" class="small text-primary text-decoration-none">← Kembali ke Dashboard</a>
             <h1 class="h3 fw-bold mt-2 mb-1">⚙️ Pengaturan AI</h1>
             <p class="text-secondary small" style="max-width: 40rem;">
                 API key dipakai oleh fitur <strong>✨ Buat Soal dengan AI</strong>. Key disimpan di server (tidak pernah
