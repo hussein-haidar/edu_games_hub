@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminAiSettingsController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminGameController;
 use App\Http\Controllers\Admin\AdminMapelController;
@@ -77,6 +78,13 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
     Route::get('/games/{game}/soals', [AdminSoalController::class, 'index'])->name('soals.index');
     Route::post('/games/{game}/soals', [AdminSoalController::class, 'store'])->name('soals.store');
+    Route::post('/games/{game}/soals/generate-ai', [AdminSoalController::class, 'generateAi'])->name('soals.generate-ai');
+    Route::post('/games/{game}/soals/save-ai', [AdminSoalController::class, 'saveAi'])->name('soals.save-ai');
     Route::put('/games/{game}/soals/{soal}', [AdminSoalController::class, 'update'])->name('soals.update');
     Route::delete('/games/{game}/soals/{soal}', [AdminSoalController::class, 'destroy'])->name('soals.destroy');
+
+    // Pengaturan AI (API key pembuat soal)
+    Route::get('/pengaturan-ai', [AdminAiSettingsController::class, 'index'])->name('ai-settings.index');
+    Route::post('/pengaturan-ai/uji', [AdminAiSettingsController::class, 'test'])->name('ai-settings.test');
+    Route::post('/pengaturan-ai', [AdminAiSettingsController::class, 'update'])->name('ai-settings.update');
 });

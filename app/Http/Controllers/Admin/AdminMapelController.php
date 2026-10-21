@@ -24,6 +24,7 @@ class AdminMapelController extends Controller
             'kelas' => ['nullable', 'string', 'max:50'],
             'deskripsi' => ['nullable', 'string'],
             'icon' => ['nullable', 'string', 'max:100'],
+            'maskot' => ['nullable', 'string', 'max:10'],
             'warna' => ['nullable', 'string', 'max:50'],
         ]);
 
@@ -39,6 +40,7 @@ class AdminMapelController extends Controller
             'kelas' => ['nullable', 'string', 'max:50'],
             'deskripsi' => ['nullable', 'string'],
             'icon' => ['nullable', 'string', 'max:100'],
+            'maskot' => ['nullable', 'string', 'max:10'],
             'warna' => ['nullable', 'string', 'max:50'],
             'aktif' => ['nullable', 'boolean'],
         ]);

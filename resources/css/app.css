@@ -1,3 +1,456 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
 @import 'bootstrap/dist/css/bootstrap.min.css';
 
 [x-cloak] { display: none; }
+
+/* ===== Edu Games Hub — gaya khusus game & anak ===== */
+
+body {
+    font-family: 'Nunito', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* Tombol pilihan jawaban */
+.btn-jawab {
+    background: #fff;
+    padding: .75rem 1rem;
+    text-align: start;
+    transition: transform .12s ease, box-shadow .12s ease, background-color .15s ease, border-color .15s ease;
+}
+
+.btn-jawab:hover:not(.disabled) {
+    border-color: var(--mapel-warna, #4f46e5);
+    box-shadow: 0 .125rem .375rem rgba(0, 0, 0, .08);
+    transform: translateY(-1px);
+}
+
+.btn-jawab:disabled {
+    opacity: 1;
+}
+
+.btn-jawab-benar {
+    background: #d1e7dd !important;
+    border-color: #198754 !important;
+    color: #0f5132 !important;
+    font-weight: 600;
+}
+
+.btn-jawab-salah {
+    background: #f8d7da !important;
+    border-color: #dc3545 !important;
+    color: #842029 !important;
+    font-weight: 600;
+}
+
+/* Feedback benar/salah muncul lembut */
+@keyframes muncul {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: none; }
+}
+
+.animasi-muncul {
+    animation: muncul .22s ease-out;
+}
+
+/* Kartu mapel & game sedikit terangkat saat disentuh */
+a.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1) !important;
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+/* ===== Game isian singkat ===== */
+.input-isian {
+    font-size: 1.1rem;
+    padding: .75rem 1rem;
+}
+
+/* ===== Game mengurutkan ===== */
+.chip-urutkan {
+    display: inline-block;
+    width: auto;
+    text-align: start;
+    white-space: normal;
+}
+
+/* ===== Game menjodohkan gambar ===== */
+.gambar-kecil {
+    width: 3rem;
+    height: 3rem;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Pasangan chip (emoji/foto — keterangan) */
+.pasangan-chip {
+    font-size: .95rem;
+    padding: .45rem .7rem;
+    border-radius: .6rem;
+    gap: .4rem !important;
+}
+
+.pasangan-chip .gambar-kecil {
+    width: 1.8rem;
+    height: 1.8rem;
+}
+
+.pasangan-benar {
+    background: #d1e7dd !important;
+    border: 1px solid #198754 !important;
+    color: #0f5132 !important;
+}
+
+.pasangan-salah {
+    background: #f8d7da !important;
+    border: 1px solid #dc3545 !important;
+    color: #842029 !important;
+}
+
+/* Gambar terpilih di kolom kiri */
+.btn-jawab.terpilih {
+    border-color: #4f46e5 !important;
+    box-shadow: 0 0 0 .2rem rgba(79, 70, 229, .25);
+}
+
+/* ============================================================
+   Tampilan umum — navbar, hero, kartu statistik, CTA premium
+   ============================================================ */
+
+/* Navbar pengguna: putih transparan + bayangan lembut */
+.navbar-utama {
+    background: rgba(255, 255, 255, .92);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 1px 0 rgba(15, 23, 42, .06), 0 10px 24px -18px rgba(15, 23, 42, .45);
+}
+
+.navbar-utama .navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+    padding: 0;
+}
+
+.logo-utama {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.3rem;
+    height: 2.3rem;
+    border-radius: .75rem;
+    font-size: 1.15rem;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    box-shadow: 0 .5rem 1rem -.4rem rgba(99, 102, 241, .7);
+}
+
+.brand-teks {
+    font-weight: 800;
+    background: linear-gradient(90deg, #4f46e5, #9333ea);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Lencana premium emas */
+.badge-premium {
+    display: inline-flex;
+    align-items: center;
+    gap: .25rem;
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    color: #7c2d12;
+    font-weight: 700;
+    font-size: .78rem;
+    padding: .3rem .65rem;
+    border-radius: 999px;
+    box-shadow: 0 .3rem .6rem -.3rem rgba(245, 158, 11, .8);
+}
+
+/* Tombol emas "premium" */
+.btn-premium {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    color: #78350f;
+    border: none;
+    font-weight: 700;
+    box-shadow: 0 .4rem .8rem -.4rem rgba(245, 158, 11, .9);
+    white-space: nowrap;
+}
+
+.btn-premium:hover,
+.btn-premium:focus {
+    background: linear-gradient(135deg, #d97706, #f59e0b);
+    color: #fff;
+}
+
+/* Pil poin emas */
+.poin-pill {
+    background: linear-gradient(135deg, #fffbeb, #fde68a);
+    border: 1px solid #fcd34d;
+    color: #92400e;
+    font-weight: 700;
+    font-size: .82rem;
+    padding: .3rem .7rem;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: transform .12s ease;
+}
+
+.poin-pill:hover {
+    transform: translateY(-1px);
+    color: #78350f;
+}
+
+/* Chip nama pengguna + avatar inisial */
+.chip-user {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    color: #1e293b;
+    font-weight: 700;
+    font-size: .9rem;
+    text-decoration: none;
+    padding: .2rem .3rem;
+    border-radius: 999px;
+}
+
+.chip-user:hover {
+    color: #4f46e5;
+}
+
+.avatar-user {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    color: #fff;
+    font-size: .85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    flex-shrink: 0;
+}
+
+/* Header berwarna dengan lingkaran dekoratif (hero mapel & kartu mapel) */
+.header-mapel {
+    position: relative;
+    overflow: hidden;
+}
+
+.header-mapel::before,
+.header-mapel::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .14);
+    pointer-events: none;
+}
+
+.header-mapel::before {
+    width: 9rem;
+    height: 9rem;
+    right: -2.5rem;
+    top: -3.5rem;
+}
+
+.header-mapel::after {
+    width: 6rem;
+    height: 6rem;
+    right: 5rem;
+    bottom: -3.5rem;
+    background: rgba(255, 255, 255, .1);
+}
+
+.header-mapel > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Hero sapaan dashboard (gradasi indigo → ungu → merah muda) */
+.hero-sapa {
+    background: linear-gradient(120deg, #4f46e5 0%, #9333ea 55%, #db2777 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-sapa::before,
+.hero-sapa::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .12);
+    pointer-events: none;
+}
+
+.hero-sapa::before {
+    width: 14rem;
+    height: 14rem;
+    right: -3rem;
+    top: -5rem;
+}
+
+.hero-sapa::after {
+    width: 9rem;
+    height: 9rem;
+    right: 9rem;
+    bottom: -5rem;
+    background: rgba(255, 255, 255, .08);
+}
+
+.hero-sapa > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Kartu statistik dengan ikon berwarna */
+.kartu-stat {
+    background: #fff;
+    border: 1px solid #eef2f7;
+    border-radius: 1rem;
+    padding: .9rem 1rem;
+    display: flex;
+    gap: .75rem;
+    align-items: center;
+    height: 100%;
+}
+
+.kartu-stat-ikon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: .8rem;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.kartu-stat-angka {
+    font-size: 1.35rem;
+    font-weight: 800;
+    line-height: 1.15;
+}
+
+.kartu-stat-label {
+    font-size: .78rem;
+    color: #64748b;
+}
+
+.stat-biru .kartu-stat-ikon { background: #e0e7ff; }
+.stat-biru .kartu-stat-angka { color: #4f46e5; }
+.stat-emas .kartu-stat-ikon { background: #fef3c7; }
+.stat-emas .kartu-stat-angka { color: #d97706; }
+.stat-hijau .kartu-stat-ikon { background: #d1fae5; }
+.stat-hijau .kartu-stat-angka { color: #059669; }
+.stat-ungu .kartu-stat-ikon { background: #ede9fe; }
+.stat-ungu .kartu-stat-angka { color: #7c3aed; }
+.stat-merah .kartu-stat-ikon { background: #fee2e2; }
+.stat-merah .kartu-stat-angka { color: #dc2626; }
+.stat-sian .kartu-stat-ikon { background: #cffafe; }
+.stat-sian .kartu-stat-angka { color: #0d9488; }
+
+/* Ajakan langganan untuk pengguna free */
+.kartu-cta-premium {
+    background: linear-gradient(135deg, #fffbeb, #fef3c7);
+    border: 1px dashed #f59e0b;
+}
+
+/* Kartu game terkunci (pengguna tanpa langganan) */
+.kartu-terkunci {
+    border-style: dashed !important;
+    border-color: #cbd5e1 !important;
+    background: #f8fafc;
+}
+
+.kartu-terkunci .emoji-game {
+    filter: grayscale(.65);
+    opacity: .75;
+}
+
+/* Kartu aksi admin: terangkat saat disorot */
+.kartu-aksi {
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.kartu-aksi:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 1rem 2rem -1rem rgba(15, 23, 42, .35) !important;
+}
+
+.ikon-aksi {
+    width: 3rem;
+    height: 3rem;
+    border-radius: .9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: .7rem;
+}
+
+.ikon-aksi-biru { background: #e0e7ff; }
+.ikon-aksi-hijau { background: #d1fae5; }
+.ikon-aksi-ungu { background: #ede9fe; }
+.ikon-aksi-emas { background: #fef3c7; }
+
+/* Navbar admin: gradasi gelap */
+.navbar-admin {
+    background: linear-gradient(90deg, #0f172a, #1e293b);
+    box-shadow: 0 10px 24px -18px rgba(0, 0, 0, .9);
+}
+
+/* ============================================================
+   Halaman hasil — pita perayaan, konfeti, trofi memantul
+   ============================================================ */
+
+.pita-hasil {
+    position: relative;
+    overflow: hidden;
+}
+
+.pita-hasil > * {
+    position: relative;
+    z-index: 1;
+}
+
+.trofi-besar {
+    font-size: 4.2rem;
+    line-height: 1;
+    display: inline-block;
+    animation: pantul 1.8s ease-in-out infinite;
+    filter: drop-shadow(0 .6rem .8rem rgba(0, 0, 0, .25));
+}
+
+@keyframes pantul {
+    0%, 100% { transform: translateY(0) rotate(-4deg); }
+    50% { transform: translateY(-10px) rotate(4deg); }
+}
+
+.konfeti {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.konfeti span {
+    position: absolute;
+    top: -1.5rem;
+    width: .5rem;
+    height: .8rem;
+    border-radius: .15rem;
+    opacity: 0;
+    animation: konfeti-jatuh 3.4s linear infinite;
+}
+
+.konfeti span:nth-child(1) { left: 8%;  background: #fde68a; animation-delay: 0s; }
+.konfeti span:nth-child(2) { left: 24%; background: #a5b4fc; animation-delay: .7s; }
+.konfeti span:nth-child(3) { left: 41%; background: #f9a8d4; animation-delay: 1.4s; }
+.konfeti span:nth-child(4) { left: 58%; background: #86efac; animation-delay: .35s; }
+.konfeti span:nth-child(5) { left: 74%; background: #fdba74; animation-delay: 1.9s; }
+.konfeti span:nth-child(6) { left: 90%; background: #67e8f9; animation-delay: 1.05s; }
+
+@keyframes konfeti-jatuh {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    12% { opacity: .9; }
+    100% { transform: translateY(13rem) rotate(340deg); opacity: 0; }
+}

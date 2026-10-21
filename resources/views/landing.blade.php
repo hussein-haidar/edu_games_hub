@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Edu Games Hub — Belajar Sambil Bermain</title>
+    <link rel="icon" href="{{ asset('favicon.ico') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="d-flex flex-column min-vh-100 bg-white">
@@ -39,7 +40,7 @@
                         <div class="card-body text-center">
                             <div class="fs-1 mb-2">🧠</div>
                             <h3 class="card-title h5 fw-bold">Game Edukasi</h3>
-                            <p class="card-text text-secondary">Berbagai jenis game: kuis pilihan ganda, benar/salah, dan teka-teki jodohkan.</p>
+                            <p class="card-text text-secondary">Berbagai jenis game: pilihan ganda, benar/salah, teka-teki, isian singkat, mengurutkan, dan menjodohkan gambar.</p>
                         </div>
                     </div>
                 </div>

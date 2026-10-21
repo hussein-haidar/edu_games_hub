@@ -26,6 +26,9 @@
                 <option value="kuis">Pilihan Ganda</option>
                 <option value="bener_salah">Benar / Salah</option>
                 <option value="teka_teki">Teka-Teki Jodohkan</option>
+                <option value="isian">Isian Singkat</option>
+                <option value="urutkan">Mengurutkan</option>
+                <option value="cocok_gambar">Menjodohkan Gambar</option>
             </select>
         </div>
         <div class="mb-3">

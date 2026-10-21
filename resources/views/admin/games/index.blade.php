@@ -37,12 +37,7 @@
                             <td class="ps-3 fw-medium">{{ $game->nama }}</td>
                             <td class="text-secondary">{{ $game->mapel->nama }}</td>
                             <td>
-                                @switch($game->jenis)
-                                    @case('kuis') Pilihan Ganda @break
-                                    @case('bener_salah') Benar/Salah @break
-                                    @case('teka_teki') Teka-Teki Jodohkan @break
-                                    @default {{ $game->jenis }}
-                                @endswitch
+                                {{ $game->jenis_label }}
                             </td>
                             <td>{{ $game->soals_count }}</td>
                             <td><span class="badge {{ $game->aktif ? 'text-bg-success' : 'text-bg-secondary' }}">{{ $game->aktif ? 'Aktif' : 'Nonaktif' }}</span></td>

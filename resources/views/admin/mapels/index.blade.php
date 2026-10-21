@@ -14,6 +14,7 @@
                     form.querySelector('[name=kelas]').value = btn.dataset.kelas;
                     form.querySelector('[name=deskripsi]').value = btn.dataset.deskripsi;
                     form.querySelector('[name=warna]').value = btn.dataset.warna;
+                    form.querySelector('[name=maskot]').value = btn.dataset.maskot || '';
                 });
             });
         });
@@ -50,7 +51,16 @@
                             <option value="calculator">🧮 Kalkulator</option>
                             <option value="flask">🧪 Labu</option>
                             <option value="book">📚 Buku</option>
+                            <option value="globe">🌍 Globe</option>
+                            <option value="shield">🛡️ Perisai</option>
+                            <option value="music">🎵 Musik</option>
+                            <option value="flag">🚩 Bendera</option>
                         </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-medium">Maskot (emoji, opsional)</label>
+                        <input type="text" name="maskot" maxlength="4" placeholder="cth: 🦎" class="form-control form-control-sm">
+                        <div class="form-text">Karakter khas mapel ini. Kosongkan untuk memakai icon.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label small fw-medium">Warna (hex)</label>
@@ -70,7 +80,7 @@
                         <div class="d-flex justify-content-between align-items-start">
                             <div class="d-flex gap-3">
                                 <div class="rounded d-flex align-items-center justify-content-center text-white fs-3" style="width:3rem; height:3rem; background: {{ $mapel->warna }}">
-                                    {{ $mapel->icon === 'calculator' ? '🧮' : ($mapel->icon === 'flask' ? '🧪' : '📚') }}
+                                    {{ $mapel->karakter }}
                                 </div>
                                 <div>
                                     <h3 class="h6 fw-bold mb-0">{{ $mapel->nama }}</h3>
@@ -84,7 +94,7 @@
                             <button type="button" class="btn btn-sm btn-light border"
                                 data-bs-toggle="modal" data-bs-target="#editMapel-{{ $mapel->id }}"
                                 data-nama="{{ $mapel->nama }}" data-kelas="{{ $mapel->kelas }}"
-                                data-deskripsi="{{ $mapel->deskripsi }}" data-warna="{{ $mapel->warna }}">Edit</button>
+                                data-deskripsi="{{ $mapel->deskripsi }}" data-warna="{{ $mapel->warna }}" data-maskot="{{ $mapel->maskot }}">Edit</button>
                             <form method="POST" action="{{ route('admin.mapels.destroy', $mapel) }}" onsubmit="return confirm('Hapus mapel ini beserta semua game & soalnya?')">
                                 @csrf @method('DELETE')
                                 <button class="btn btn-sm btn-danger">Hapus</button>
@@ -114,6 +124,10 @@
                                 <div class="mb-3">
                                     <label class="form-label small fw-medium">Warna</label>
                                     <input type="text" name="warna" value="{{ $mapel->warna }}" class="form-control form-control-sm">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label small fw-medium">Maskot (emoji, opsional)</label>
+                                    <input type="text" name="maskot" value="{{ $mapel->maskot }}" maxlength="4" placeholder="cth: 🦎" class="form-control form-control-sm">
                                 </div>
                                 <div class="form-check mb-3">
                                     <input type="checkbox" name="aktif" value="1" {{ $mapel->aktif ? 'checked' : '' }} class="form-check-input" id="aktif-{{ $mapel->id }}">

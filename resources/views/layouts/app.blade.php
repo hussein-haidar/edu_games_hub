@@ -4,24 +4,31 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'Edu Games Hub')</title>
+    <link rel="icon" href="{{ asset('favicon.ico') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="d-flex flex-column min-vh-100 bg-light">
-    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-utama sticky-top">
         <div class="container">
-            <a href="{{ route('dashboard') }}" class="navbar-brand fw-bold text-primary">
-                <span class="fs-4">🎮</span> Edu Games Hub
+            <a href="{{ route('dashboard') }}" class="navbar-brand">
+                <span class="logo-utama">🎮</span>
+                <span class="brand-teks">Edu Games Hub</span>
             </a>
             <div class="d-flex align-items-center gap-2 flex-wrap">
                 @if(auth()->user()->isSubscribed())
-                    <span class="badge rounded-pill text-bg-success">Premium</span>
+                    <span class="badge-premium">👑 Premium</span>
+                    <a href="{{ route('subscription') }}" class="btn btn-sm btn-outline-primary rounded-pill fw-semibold">Langganan</a>
+                @else
+                    <a href="{{ route('subscription') }}" class="btn btn-sm btn-premium rounded-pill">✨ Coba Premium</a>
                 @endif
-                <a href="{{ route('subscription') }}" class="btn btn-sm btn-link text-secondary text-decoration-none">Langganan</a>
-                <span class="badge rounded-pill text-bg-primary">⭐ {{ auth()->user()->points }} poin</span>
-                <a href="{{ route('profile') }}" class="fw-semibold text-dark text-decoration-none">{{ auth()->user()->name }}</a>
+                <a href="{{ route('profile') }}" class="poin-pill">⭐ {{ auth()->user()->points }} poin</a>
+                <a href="{{ route('profile') }}" class="chip-user">
+                    <span class="avatar-user">{{ mb_substr(auth()->user()->name, 0, 1) }}</span>
+                    {{ auth()->user()->name }}
+                </a>
                 <form method="POST" action="{{ route('logout') }}" class="d-inline">
                     @csrf
-                    <button class="btn btn-sm btn-outline-secondary">Keluar</button>
+                    <button class="btn btn-sm btn-outline-secondary rounded-pill">Keluar</button>
                 </form>
             </div>
         </div>

@@ -76,6 +76,7 @@ class DatabaseSeeder extends Seeder
                 'kelas' => 'SD',
                 'deskripsi' => 'Belajar berhitung, penjumlahan, pengurangan, perkalian dan pembagian dengan cara yang seru!',
                 'icon' => 'calculator',
+                'maskot' => '🦎',
                 'warna' => '#4f46e5',
                 'urutan' => 1,
             ]
@@ -117,6 +118,7 @@ class DatabaseSeeder extends Seeder
                 'kelas' => 'SD',
                 'deskripsi' => 'Jelajahi tubuh manusia, hewan, tumbuhan dan alam sekitar dengan kuis sains yang menyenangkan.',
                 'icon' => 'flask',
+                'maskot' => '🐬',
                 'warna' => '#059669',
                 'urutan' => 2,
             ]
@@ -158,6 +160,7 @@ class DatabaseSeeder extends Seeder
                 'kelas' => 'SD',
                 'deskripsi' => 'Kumpulan soal Bahasa Indonesia, IPS dan pengetahuan umum lainnya dalam bentuk permainan yang seru.',
                 'icon' => 'book',
+                'maskot' => '🐘',
                 'warna' => '#d97706',
                 'urutan' => 3,
             ]
@@ -199,6 +202,7 @@ class DatabaseSeeder extends Seeder
                 'kelas' => 'SD',
                 'deskripsi' => 'Belajar ejaan, kosakata, peribahasa dan pemahaman bacaan Bahasa Indonesia dengan seru.',
                 'icon' => 'book',
+                'maskot' => '🦜',
                 'warna' => '#7c3aed',
                 'urutan' => 4,
             ]
@@ -240,6 +244,7 @@ class DatabaseSeeder extends Seeder
                 'kelas' => 'SD',
                 'deskripsi' => 'Kenali geografi, sejarah dan pengetahuan sosial Indonesia dalam kuis yang menyenangkan.',
                 'icon' => 'globe',
+                'maskot' => '🐃',
                 'warna' => '#0d9488',
                 'urutan' => 5,
             ]
@@ -281,6 +286,7 @@ class DatabaseSeeder extends Seeder
                 'kelas' => 'SD',
                 'deskripsi' => 'Perkenalkan kosakata dan kalimat dasar Bahasa Inggris dengan permainan yang seru.',
                 'icon' => 'flag',
+                'maskot' => '🐯',
                 'warna' => '#db2777',
                 'urutan' => 6,
             ]
@@ -322,6 +328,7 @@ class DatabaseSeeder extends Seeder
                 'kelas' => 'SD',
                 'deskripsi' => 'Kenali Pancasila, lambang negara dan nilai-nilai kewarganegaraan Indonesia.',
                 'icon' => 'shield',
+                'maskot' => '🦅',
                 'warna' => '#dc2626',
                 'urutan' => 7,
             ]
@@ -363,6 +370,7 @@ class DatabaseSeeder extends Seeder
                 'kelas' => 'SD',
                 'deskripsi' => 'Kenalilah alat musik, tarian dan kesenian daerah Indonesia dengan kuis yang menarik.',
                 'icon' => 'music',
+                'maskot' => '🦚',
                 'warna' => '#ca8a04',
                 'urutan' => 8,
             ]
@@ -396,6 +404,49 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
+        // ===== GAME CONTOH JENIS BARU (isian, urutkan, menjodohkan) =====
+        $ipaIsian = Game::updateOrCreate(
+            ['slug' => 'ipa-isian'],
+            [
+                'mapel_id' => $ipa->id,
+                'nama' => 'Isian Singkat IPA',
+                'jenis' => 'isian',
+                'deskripsi' => 'Ketik jawabanmu untuk melengkapi kalimat IPA berikut ini.',
+                'icon' => 'flask',
+                'durasi_menit' => 5,
+                'poin_per_benar' => 10,
+                'urutan' => 3,
+            ]
+        );
+
+        $ipsUrutkan = Game::updateOrCreate(
+            ['slug' => 'ips-urutkan'],
+            [
+                'mapel_id' => $ips->id,
+                'nama' => 'Urutkan Kejadian',
+                'jenis' => 'urutkan',
+                'deskripsi' => 'Susun kejadian dan hari sesuai urutan yang benar.',
+                'icon' => 'globe',
+                'durasi_menit' => 5,
+                'poin_per_benar' => 10,
+                'urutan' => 3,
+            ]
+        );
+
+        $cocokHewan = Game::updateOrCreate(
+            ['slug' => 'materi-lain-cocok-hewan'],
+            [
+                'mapel_id' => $materiLain->id,
+                'nama' => 'Jodohkan Gambar Hewan',
+                'jenis' => 'cocok_gambar',
+                'deskripsi' => 'Pasangkan gambar hewan dengan namanya.',
+                'icon' => 'puzzle',
+                'durasi_menit' => 5,
+                'poin_per_benar' => 10,
+                'urutan' => 3,
+            ]
+        );
+
         $this->seedSoalKuisMatematika($gameKuis);
         $this->seedSoalBenerSalahMatematika($gameBenerSalah);
         $this->seedSoalKuisIpa($gameSains);
@@ -412,6 +463,9 @@ class DatabaseSeeder extends Seeder
         $this->seedSoalBenerSalahPkn($pknBenerSalah);
         $this->seedSoalKuisSeni($seniKuis);
         $this->seedSoalTekaSeni($seniTeka);
+        $this->seedSoalIsianIpa($ipaIsian);
+        $this->seedSoalUrutkanIps($ipsUrutkan);
+        $this->seedSoalCocokHewan($cocokHewan);
     }
 
     private function seedSoalKuisMatematika(Game $game): void
@@ -698,6 +752,66 @@ class DatabaseSeeder extends Seeder
             Soal::updateOrCreate(
                 ['game_id' => $game->id, 'pertanyaan' => $s['pertanyaan']],
                 ['jawaban_benar' => $s['jawaban'], 'penjelasan' => $s['penjelasan'], 'urutan' => $s['urutan']]
+            );
+        }
+    }
+
+    private function seedSoalIsianIpa(Game $game): void
+    {
+        $soal = [
+            ['pertanyaan' => 'Alat pernapasan pada manusia adalah ....', 'jawaban' => 'paru-paru|paru paru', 'penjelasan' => 'Paru-paru mengambil oksigen dari udara yang kita hirup', 'urutan' => 1],
+            ['pertanyaan' => 'Tumbuhan membuat makanannya sendiri melalui proses ....', 'jawaban' => 'fotosintesis', 'penjelasan' => 'Fotosintesis memanfaatkan cahaya matahari, air, dan karbon dioksida', 'urutan' => 2],
+            ['pertanyaan' => 'Zat yang dibutuhkan tubuh untuk bernapas adalah ....', 'jawaban' => 'oksigen', 'penjelasan' => 'Kita memerlukan oksigen untuk bernapas', 'urutan' => 3],
+            ['pertanyaan' => 'Alat indera untuk melihat adalah ....', 'jawaban' => 'mata', 'penjelasan' => 'Mata adalah alat indera penglihatan', 'urutan' => 4],
+            ['pertanyaan' => 'Hewan yang menyusui anaknya disebut ....', 'jawaban' => 'mamalia', 'penjelasan' => 'Contoh mamalia: kucing, sapi, dan manusia', 'urutan' => 5],
+        ];
+
+        foreach ($soal as $s) {
+            Soal::updateOrCreate(
+                ['game_id' => $game->id, 'pertanyaan' => $s['pertanyaan']],
+                ['jawaban_benar' => $s['jawaban'], 'penjelasan' => $s['penjelasan'], 'urutan' => $s['urutan']]
+            );
+        }
+    }
+
+    private function seedSoalUrutkanIps(Game $game): void
+    {
+        $presiden = ['Soekarno', 'Suharto', 'B.J. Habibie', 'Abdurrahman Wahid'];
+        $kronologi = ['Sumpah Pemuda (1928)', 'Pembentukan PPKI (7 Agustus 1945)', 'Proklamasi Kemerdekaan (17 Agustus 1945)', 'Pengakuan Kedaulatan RI (27 Desember 1949)'];
+        $hari = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat'];
+
+        $soal = [
+            ['pertanyaan' => 'Urutkan presiden Indonesia yang pertama sampai keempat.', 'urutan_benar' => $presiden, 'penjelasan' => 'Urutan presiden: Soekarno, Suharto, B.J. Habibie, lalu Abdurrahman Wahid', 'urutan' => 1],
+            ['pertanyaan' => 'Urutkan kejadian berikut dari yang paling awal.', 'urutan_benar' => $kronologi, 'penjelasan' => 'Sumpah Pemuda 1928 mendahului peristiwa Agustus 1945, baru diakui dunia pada 1949', 'urutan' => 2],
+            ['pertanyaan' => 'Urutkan hari kerja dari awal minggu.', 'urutan_benar' => $hari, 'penjelasan' => 'Minggu adalah hari pertama, jadi hari kerja dimulai dari Senin', 'urutan' => 3],
+        ];
+
+        foreach ($soal as $s) {
+            Soal::updateOrCreate(
+                ['game_id' => $game->id, 'pertanyaan' => $s['pertanyaan']],
+                ['pilihan' => $s['urutan_benar'], 'jawaban_benar' => implode(' → ', $s['urutan_benar']), 'penjelasan' => $s['penjelasan'], 'urutan' => $s['urutan']]
+            );
+        }
+    }
+
+    private function seedSoalCocokHewan(Game $game): void
+    {
+        $pasangan = [
+            ['kiri' => '🐘', 'kanan' => 'Gajah'],
+            ['kiri' => '🦒', 'kanan' => 'Jerapah'],
+            ['kiri' => '🐧', 'kanan' => 'Pinguin'],
+            ['kiri' => '🐬', 'kanan' => 'Lumba-lumba'],
+        ];
+
+        $soal = [
+            ['pertanyaan' => 'Jodohkan gambar hewan dengan namanya.', 'penjelasan' => 'Gajah hewan darat terbesar, jerapah terkenal dengan leher panjangnya, pinguin hidup di daerah dingin, dan lumba-lumba hidup di laut', 'urutan' => 1],
+            ['pertanyaan' => 'Pasangkan setiap gambar dengan nama hewan yang tepat.', 'penjelasan' => 'Semua hewan ini bisa kamu temukan di kebun binatang', 'urutan' => 2],
+        ];
+
+        foreach ($soal as $s) {
+            Soal::updateOrCreate(
+                ['game_id' => $game->id, 'pertanyaan' => $s['pertanyaan']],
+                ['pilihan' => $pasangan, 'jawaban_benar' => implode(', ', array_map(fn ($p) => $p['kiri'].' = '.$p['kanan'], $pasangan)), 'penjelasan' => $s['penjelasan'], 'urutan' => $s['urutan']]
             );
         }
     }

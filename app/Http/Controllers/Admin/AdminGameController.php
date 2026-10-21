@@ -37,7 +37,7 @@ class AdminGameController extends Controller
         $data = $request->validate([
             'mapel_id' => ['required', 'exists:mapels,id'],
             'nama' => ['required', 'string', 'max:255'],
-            'jenis' => ['required', 'in:kuis,bener_salah,teka_teki,drag_drop'],
+            'jenis' => ['required', 'in:kuis,bener_salah,teka_teki,isian,urutkan,cocok_gambar,drag_drop'],
             'deskripsi' => ['nullable', 'string'],
             'icon' => ['nullable', 'string', 'max:100'],
             'durasi_menit' => ['nullable', 'integer', 'min:1', 'max:120'],
@@ -61,7 +61,7 @@ class AdminGameController extends Controller
         $data = $request->validate([
             'mapel_id' => ['required', 'exists:mapels,id'],
             'nama' => ['required', 'string', 'max:255'],
-            'jenis' => ['required', 'in:kuis,bener_salah,teka_teki,drag_drop'],
+            'jenis' => ['required', 'in:kuis,bener_salah,teka_teki,isian,urutkan,cocok_gambar,drag_drop'],
             'deskripsi' => ['nullable', 'string'],
             'icon' => ['nullable', 'string', 'max:100'],
             'durasi_menit' => ['nullable', 'integer', 'min:1', 'max:120'],
@@ -77,6 +77,9 @@ class AdminGameController extends Controller
 
     public function destroy(Game $game)
     {
+        // Bersihkan file gambar hasil upload sebelum soal ikut terhapus (cascade)
+        $game->soals()->each(fn ($soal) => $soal->hapusGambarTerupload());
+
         $game->delete();
 
         return back()->with('success', 'Game beserta soalnya dihapus.');

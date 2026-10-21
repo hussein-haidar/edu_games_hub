@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title') — Edu Games Hub</title>
+    <link rel="icon" href="{{ asset('favicon.ico') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-vh-100 d-flex align-items-center justify-content-center p-3" style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);">

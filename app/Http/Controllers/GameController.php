@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Game;
 use App\Models\Progres;
+use App\Models\Soal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,7 +48,7 @@ class GameController extends Controller
 
         foreach ($game->soals as $soal) {
             $jawabanUser = $jawaban[$soal->id] ?? null;
-            if ($jawabanUser !== null && trim($jawabanUser) === trim($soal->jawaban_benar)) {
+            if ($this->dijawabBenar($game->jenis, $soal, $jawabanUser)) {
                 $benar++;
                 $skor += $game->poin_per_benar;
             }
@@ -84,5 +85,80 @@ class GameController extends Controller
             ->first();
 
         return view('games.result', compact('game', 'benar', 'salah', 'skor', 'total', 'progres'));
+    }
+
+    /**
+     * Penilaian satu jawaban siswa sesuai jenis game.
+     *
+     * - kuis / bener_salah / teka_teki → teks yang sama dengan jawaban_benar
+     * - isian      → teks, tidak peka huruf besar/kecil & spasi;
+     *                jawaban_benar boleh memuat beberapa varian dipisah "|"
+     * - urutkan    → array urutan item siswa, dibandingkan dengan pilihan
+     *                (pilihan menyimpan urutan yang benar)
+     * - cocok_gambar → array pasangan [kiri, kanan], dibandingkan dengan
+     *                pilihan (array objek {kiri, kanan})
+     */
+    private function dijawabBenar(string $jenis, Soal $soal, mixed $user): bool
+    {
+        if ($user === null) {
+            return false;
+        }
+
+        switch ($jenis) {
+            case 'isian':
+                if (! is_string($user)) {
+                    return false;
+                }
+                $norm = fn ($s) => mb_strtolower((string) preg_replace('/\s+/u', ' ', trim((string) $s)));
+                $kunci = array_values(array_filter(array_map($norm, explode('|', (string) $soal->jawaban_benar))));
+                $jawaban = $norm($user);
+
+                return $jawaban !== '' && in_array($jawaban, $kunci, true);
+
+            case 'urutkan':
+                if (! is_array($user)) {
+                    return false;
+                }
+                $benar = array_values($soal->pilihan ?? []);
+                if ($benar === [] || count($user) !== count($benar)) {
+                    return false;
+                }
+                foreach ($benar as $i => $item) {
+                    if (mb_strtolower(trim((string) ($user[$i] ?? ''))) !== mb_strtolower(trim((string) $item))) {
+                        return false;
+                    }
+                }
+
+                return true;
+
+            case 'cocok_gambar':
+                if (! is_array($user)) {
+                    return false;
+                }
+                $kunci = [];
+                foreach ($soal->pilihan ?? [] as $pasangan) {
+                    if (is_array($pasangan) && isset($pasangan['kiri'], $pasangan['kanan'])) {
+                        $kunci[mb_strtolower(trim($pasangan['kiri']))] = trim($pasangan['kanan']);
+                    }
+                }
+                if ($kunci === [] || count($user) !== count($kunci)) {
+                    return false;
+                }
+                foreach ($user as $pasangan) {
+                    if (! is_array($pasangan)) {
+                        return false;
+                    }
+                    $k = mb_strtolower(trim((string) ($pasangan[0] ?? '')));
+                    $v = trim((string) ($pasangan[1] ?? ''));
+                    if ($k === '' || ! isset($kunci[$k]) || $kunci[$k] !== $v) {
+                        return false;
+                    }
+                }
+
+                return true;
+
+            default: // kuis, bener_salah, teka_teki
+                return is_string($user) && trim($user) === trim($soal->jawaban_benar);
+        }
     }
 }

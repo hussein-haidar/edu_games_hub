@@ -26,6 +26,9 @@
                 <option value="kuis" {{ $game->jenis == 'kuis' ? 'selected' : '' }}>Pilihan Ganda</option>
                 <option value="bener_salah" {{ $game->jenis == 'bener_salah' ? 'selected' : '' }}>Benar / Salah</option>
                 <option value="teka_teki" {{ $game->jenis == 'teka_teki' ? 'selected' : '' }}>Teka-Teki Jodohkan</option>
+                <option value="isian" {{ $game->jenis == 'isian' ? 'selected' : '' }}>Isian Singkat</option>
+                <option value="urutkan" {{ $game->jenis == 'urutkan' ? 'selected' : '' }}>Mengurutkan</option>
+                <option value="cocok_gambar" {{ $game->jenis == 'cocok_gambar' ? 'selected' : '' }}>Menjodohkan Gambar</option>
             </select>
         </div>
         <div class="mb-3">
