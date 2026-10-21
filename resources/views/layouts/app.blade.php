@@ -14,22 +14,43 @@
                 <span class="logo-utama">🎮</span>
                 <span class="brand-teks">Edu Games Hub</span>
             </a>
-            <div class="d-flex align-items-center gap-2 flex-wrap">
-                @if(auth()->user()->isSubscribed())
-                    <span class="badge-premium">👑 Premium</span>
-                    <a href="{{ route('subscription') }}" class="btn btn-sm btn-outline-primary rounded-pill fw-semibold">Langganan</a>
-                @else
-                    <a href="{{ route('subscription') }}" class="btn btn-sm btn-premium rounded-pill">✨ Coba Premium</a>
-                @endif
-                <a href="{{ route('profile') }}" class="poin-pill">⭐ {{ auth()->user()->points }} poin</a>
-                <a href="{{ route('profile') }}" class="chip-user">
-                    <span class="avatar-user">{{ mb_substr(auth()->user()->name, 0, 1) }}</span>
-                    {{ auth()->user()->name }}
-                </a>
-                <form method="POST" action="{{ route('logout') }}" class="d-inline">
-                    @csrf
-                    <button class="btn btn-sm btn-outline-secondary rounded-pill">Keluar</button>
-                </form>
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navPengguna" aria-controls="navPengguna" aria-expanded="false" aria-label="Buka menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navPengguna">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-lg-1">
+                    <li class="nav-item">
+                        <a href="{{ route('dashboard') }}" class="nav-link nav-tautan {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                            🏠 Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('subscription') }}" class="nav-link nav-tautan {{ request()->routeIs('subscription*') ? 'active' : '' }}">
+                            💎 Langganan
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('profile') }}" class="nav-link nav-tautan {{ request()->routeIs('profile') ? 'active' : '' }}">
+                            👤 Profil
+                        </a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center gap-2 flex-wrap py-2 py-lg-0">
+                    @if(auth()->user()->isSubscribed())
+                        <span class="badge-premium">👑 Premium</span>
+                    @else
+                        <a href="{{ route('subscription') }}" class="btn btn-sm btn-premium rounded-pill">✨ Coba Premium</a>
+                    @endif
+                    <a href="{{ route('profile') }}" class="poin-pill">⭐ {{ auth()->user()->points }} poin</a>
+                    <a href="{{ route('profile') }}" class="chip-user">
+                        <span class="avatar-user">{{ mb_substr(auth()->user()->name, 0, 1) }}</span>
+                        <span class="d-none d-sm-inline">{{ auth()->user()->name }}</span>
+                    </a>
+                    <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                        @csrf
+                        <button class="btn btn-sm btn-outline-secondary rounded-pill">Keluar</button>
+                    </form>
+                </div>
             </div>
         </div>
     </nav>

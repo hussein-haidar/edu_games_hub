@@ -454,3 +454,96 @@ a.card:hover {
     12% { opacity: .9; }
     100% { transform: translateY(13rem) rotate(340deg); opacity: 0; }
 }
+
+/* ============================================================
+   Navbar — tautan navigasi, aktif, dan tampilan mobile
+   ============================================================ */
+
+/* Tautan navbar pengguna */
+.nav-tautan {
+    color: #475569;
+    font-weight: 600;
+    font-size: .95rem;
+    border-radius: .6rem;
+    padding: .45rem .85rem !important;
+    transition: background-color .15s ease, color .15s ease;
+}
+
+.nav-tautan:hover {
+    color: #4f46e5;
+    background: rgba(79, 70, 229, .08);
+}
+
+.nav-tautan.active {
+    color: #4f46e5;
+    background: rgba(79, 70, 229, .12);
+    font-weight: 700;
+}
+
+/* Tautan navbar admin (di atas latar gelap) */
+.nav-admin-tautan {
+    color: rgba(255, 255, 255, .78);
+    font-weight: 600;
+    font-size: .95rem;
+    border-radius: .6rem;
+    padding: .45rem .85rem !important;
+    transition: background-color .15s ease, color .15s ease;
+}
+
+.nav-admin-tautan:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, .12);
+}
+
+.nav-admin-tautan.active {
+    color: #fff;
+    background: rgba(255, 255, 255, .18);
+    font-weight: 700;
+}
+
+/* Chip nama admin (avatar + nama) */
+.chip-admin {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    color: #e2e8f0;
+    font-weight: 600;
+    font-size: .9rem;
+}
+
+/* Navbar pengguna: menu dropdown saat mobile */
+@media (max-width: 991.98px) {
+    .navbar-utama .navbar-collapse {
+        background: #fff;
+        border-radius: .9rem;
+        margin-top: .6rem;
+        padding: .6rem;
+        box-shadow: 0 .75rem 1.5rem -1rem rgba(15, 23, 42, .35);
+    }
+
+    .navbar-utama .navbar-collapse .nav-tautan {
+        display: block;
+    }
+}
+
+/* Navbar admin: menu dropdown saat mobile */
+@media (max-width: 991.98px) {
+    .navbar-admin .navbar-collapse {
+        background: linear-gradient(180deg, #1e293b, #0f172a);
+        border-radius: .9rem;
+        margin-top: .6rem;
+        padding: .6rem;
+        box-shadow: 0 .75rem 1.5rem -1rem rgba(0, 0, 0, .6);
+    }
+}
+
+/* Toggler: garis lebih kontras */
+.navbar-utama .navbar-toggler,
+.navbar-admin .navbar-toggler {
+    padding: .35rem .55rem;
+}
+
+.navbar-utama .navbar-toggler:focus,
+.navbar-admin .navbar-toggler:focus {
+    box-shadow: 0 0 0 .2rem rgba(79, 70, 229, .35);
+}
