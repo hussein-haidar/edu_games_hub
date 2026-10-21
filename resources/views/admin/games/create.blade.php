@@ -6,7 +6,7 @@
     <a href="{{ route('admin.games.index') }}" class="small text-primary text-decoration-none">&larr; Kembali</a>
     <h1 class="h3 fw-bold mt-2 mb-4">Tambah Game</h1>
 
-    <form method="POST" action="{{ route('admin.games.store') }}" class="card border p-4" style="max-width: 40rem;">
+    <form method="POST" action="{{ route('admin.games.store') }}" class="card border p-4 mx-auto" style="max-width: 40rem;">
         @csrf
         <div class="mb-3">
             <label class="form-label small fw-medium">Mata Pelajaran</label>

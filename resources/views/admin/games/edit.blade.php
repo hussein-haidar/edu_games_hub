@@ -6,7 +6,7 @@
     <a href="{{ route('admin.games.index') }}" class="small text-primary text-decoration-none">&larr; Kembali</a>
     <h1 class="h3 fw-bold mt-2 mb-4">Edit Game: {{ $game->nama }}</h1>
 
-    <form method="POST" action="{{ route('admin.games.update', $game) }}" class="card border p-4" style="max-width: 40rem;">
+    <form method="POST" action="{{ route('admin.games.update', $game) }}" class="card border p-4 mx-auto" style="max-width: 40rem;">
         @csrf @method('PUT')
         <div class="mb-3">
             <label class="form-label small fw-medium">Mata Pelajaran</label>

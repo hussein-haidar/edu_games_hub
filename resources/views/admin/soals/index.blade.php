@@ -82,7 +82,7 @@
 
 
     <div class="mb-4">
-        <div class="card border" style="max-width: 44rem;">
+        <div class="card border mx-auto" style="max-width: 44rem;">
             <div class="card-body">
                 <h2 class="h6 fw-bold mb-3">+ Tambah Soal</h2>
                 @if($errors->any())
@@ -158,7 +158,7 @@
         </div>
     </div>
 
-    <div style="max-width: 44rem;">
+    <div class="mx-auto" style="max-width: 44rem;">
         @forelse($game->soals as $soal)
             <div class="card border mb-3">
                 <div class="card-body">
