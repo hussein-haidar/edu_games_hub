@@ -3,8 +3,10 @@
 @section('title', 'Edit Game')
 
 @section('content')
-    <a href="{{ route('admin.games.index') }}" class="small text-primary text-decoration-none">&larr; Kembali</a>
-    <h1 class="h3 fw-bold mt-2 mb-4">Edit Game: {{ $game->nama }}</h1>
+    <div class="text-center mb-4">
+        <a href="{{ route('admin.games.index') }}" class="small text-primary text-decoration-none d-block mb-2">&larr; Kembali</a>
+        <h1 class="h3 fw-bold mb-0">Edit Game: {{ $game->nama }}</h1>
+    </div>
 
     <form method="POST" action="{{ route('admin.games.update', $game) }}" class="card border p-4 mx-auto" style="max-width: 40rem;">
         @csrf @method('PUT')
