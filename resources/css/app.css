@@ -511,6 +511,14 @@ a.card:hover {
     font-size: .9rem;
 }
 
+/* Kotak putih pembungkus konten halaman (semua role) */
+.halaman-box {
+    background: #fff;
+    border: 1px solid #eef2f7;
+    border-radius: 1.25rem;
+    box-shadow: 0 .5rem 1.5rem -1rem rgba(15, 23, 42, .18);
+}
+
 /* Navbar pengguna: menu dropdown saat mobile */
 @media (max-width: 991.98px) {
     .navbar-utama .navbar-collapse {

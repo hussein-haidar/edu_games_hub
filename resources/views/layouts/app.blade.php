@@ -63,7 +63,9 @@
             @if(session('error'))
                 <div class="alert alert-danger d-flex align-items-center">{{ session('error') }}</div>
             @endif
-            @yield('content')
+            <div class="halaman-box p-3 p-md-4">
+                @yield('content')
+            </div>
         </div>
     </main>
 
